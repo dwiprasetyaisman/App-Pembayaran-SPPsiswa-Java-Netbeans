@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="bulan" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     datasiswa.`nis` AS datasiswa_nis,
+     datasiswa.`nama` AS datasiswa_nama,
+     datasiswa.`kelas` AS datasiswa_kelas,
+     datasiswa.`jkelamin` AS datasiswa_jkelamin,
+     datasiswa.`TTL` AS datasiswa_TTL,
+     datasiswa.`agama` AS datasiswa_agama,
+     datasiswa.`alamat` AS datasiswa_alamat,
+     isi.`idbyr` AS isi_idbyr,
+     isi.`kdbyr` AS isi_kdbyr,
+     isi.`kelas` AS isi_kelas,
+     isi.`bulan` AS isi_bulan,
+     isi.`jmlnominal` AS isi_jmlnominal,
+     pembayaran.`idbyr` AS pembayaran_idbyr,
+     pembayaran.`tglbyr` AS pembayaran_tglbyr,
+     pembayaran.`nis` AS pembayaran_nis,
+     jenispembayaran.`kdbyr` AS jenispembayaran_kdbyr,
+     jenispembayaran.`kelas` AS jenispembayaran_kelas,
+     jenispembayaran.`jmlnominal` AS jenispembayaran_jmlnominal
+FROM
+     `isi` isi INNER JOIN `jenispembayaran` jenispembayaran ON isi.`kelas` = jenispembayaran.`kdbyr`
+     AND isi.`jmlnominal` = jenispembayaran.`jmlnominal`
+     INNER JOIN `pembayaran` pembayaran ON isi.`idbyr` = pembayaran.`idbyr`
+     INNER JOIN `datasiswa` datasiswa ON pembayaran.`nis` = datasiswa.`nis`
+
+where isi.bulan = $P{bulan}]]>
+	</queryString>
+	<field name="datasiswa_nis" class="java.lang.String"/>
+	<field name="datasiswa_nama" class="java.lang.String"/>
+	<field name="datasiswa_kelas" class="java.lang.String"/>
+	<field name="datasiswa_jkelamin" class="java.lang.String"/>
+	<field name="datasiswa_TTL" class="java.lang.String"/>
+	<field name="datasiswa_agama" class="java.lang.String"/>
+	<field name="datasiswa_alamat" class="java.lang.String"/>
+	<field name="isi_idbyr" class="java.lang.String"/>
+	<field name="isi_kdbyr" class="java.lang.String"/>
+	<field name="isi_kelas" class="java.lang.Double"/>
+	<field name="isi_bulan" class="java.lang.String"/>
+	<field name="isi_jmlnominal" class="java.lang.Integer"/>
+	<field name="pembayaran_idbyr" class="java.lang.String"/>
+	<field name="pembayaran_tglbyr" class="java.sql.Date"/>
+	<field name="pembayaran_nis" class="java.lang.String"/>
+	<field name="jenispembayaran_kdbyr" class="java.lang.String"/>
+	<field name="jenispembayaran_kelas" class="java.lang.String"/>
+	<field name="jenispembayaran_jmlnominal" class="java.lang.Integer"/>
+	<variable name="jml" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{jenispembayaran_jmlnominal}]]></variableExpression>
+	</variable>
+	<variable name="total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{jenispembayaran_jmlnominal}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<image>
+				<reportElement x="2" y="1" width="118" height="99"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\Customer\\Documents\\LOGO KEMENTERIAN AGAMA.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="2" y="103" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="120" y="15" width="437" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[YAYASAN PENDIDIKAN ISLAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="32" width="437" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MIs - NUR HIDAYAH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="56" width="437" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[JL. Kalibaru Barat IV, No.3 RT 002/012 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="67" width="437" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Kel.Kalibaru Kec.Cilincing]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="81" width="437" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[JAKARTA UTARA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="20" width="47" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bulan :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="48" y="19" width="103" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{isi_bulan}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="2" width="555" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN PER BULAN]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="39" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<rectangle>
+				<reportElement x="397" y="2" width="99" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="353" y="2" width="44" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="89" y="2" width="106" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="195" y="2" width="158" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="57" y="2" width="32" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="57" y="3" width="32" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="89" y="3" width="107" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="196" y="3" width="158" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NAMA SISWA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="3" width="44" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KELAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="3" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUMLAH NOMINAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="397" y="0" width="99" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="353" y="0" width="44" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="89" y="0" width="106" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="195" y="0" width="158" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="57" y="0" width="32" height="20"/>
+			</rectangle>
+			<textField>
+				<reportElement x="57" y="0" width="32" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="0" width="106" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{datasiswa_nis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="196" y="0" width="157" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{datasiswa_nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="353" y="0" width="44" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{datasiswa_kelas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{jml}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="2" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="373" y="0" width="94" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL  :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="467" y="0" width="87" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="373" y="21" width="181" height="1"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
